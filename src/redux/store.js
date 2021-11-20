@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore } from "@reduxjs/toolkit";
+import { appReducer } from "./app-reducer";
 
-configureStore({
-  reducer: {},
-});
-
-export default configureStore;
+export const store = createStore(
+  appReducer,
+  window.__REDUX_DEVTOOLS_EXTENSIN__ && window.__REDUX_DEVTOOLS_EXTENSIN__()
+);

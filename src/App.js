@@ -1,35 +1,40 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import CategoryListItems from "./category-list-items";
+import { getCategories } from "./services";
+import { SELECT_CATEGORY } from "./redux/actionType";
+import { useDispatch } from "react-redux";
+import { selectCategory } from "./redux/actions";
+import { Spin } from "antd";
 
 function App() {
   const [categories, setCategories] = useState([""]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const fetchData = async () => {
-    const result = await axios.get(
-      "https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/categories",
-      {
-        headers: {
-          accept: "application/json",
-          "x-rapidapi-host": "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
-          "x-rapidapi-key":
-            "479ecfdeacmsh5c6f8b141455f51p109312jsnb6decb0da1e7",
-        },
-      }
-    );
-    setCategories(result.data);
+    // TODO change to result.data
+    // const { data } = getCategories();
+    setIsLoading(true);
+    setTimeout(() => {
+      setCategories(["Category 1", "Category 2", "Category 3", "Category 4"]);
+
+      setIsLoading(false);
+    }, 1000);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  return (
-    <>
-      {categories.map((e) => {
-        return <h3>{e}</h3>;
-      })}
-    </>
-  );
+  if (!categories || isLoading) {
+    return (
+      <div>
+        <Spin />
+      </div>
+    );
+  }
+  return <CategoryListItems data={categories} />;
 }
 
 export default App;
