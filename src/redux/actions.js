@@ -2,6 +2,7 @@ import {
   SELECT_CATEGORY,
   LOAD_CATEGORY_JOKE,
   REMOVE_FROM_LIKED_LIST,
+  ADD_LIKED_JOKE,
 } from "./actionType";
 
 export const selectCategory = (category) => {
@@ -16,9 +17,16 @@ export const loadCategoryJokes = ({ joke }) => ({
   payload: { joke },
 });
 
+export const addLikedJoke = (likedJokes) => {
+  return {
+    type: ADD_LIKED_JOKE,
+    payload: likedJokes,
+  };
+};
+
 export const removeFromLikedList = (text) => {
   return {
     type: REMOVE_FROM_LIKED_LIST,
-    payload: { text },
+    payload: text,
   };
 };

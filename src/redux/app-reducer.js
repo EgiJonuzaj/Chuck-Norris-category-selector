@@ -2,12 +2,14 @@ import {
   SELECT_CATEGORY,
   LOAD_CATEGORY_JOKE,
   REMOVE_FROM_LIKED_LIST,
+  ADD_LIKED_JOKE,
 } from "./actionType";
 
 const initiaState = {
   selectedCategory: undefined,
   joke: undefined,
   likedJokes: [],
+  disLike: [],
 };
 
 export const appReducer = (state = initiaState, action) => {
@@ -23,15 +25,16 @@ export const appReducer = (state = initiaState, action) => {
         ...state,
         joke: payload.joke,
       };
-    // case ADD_LIKED_JOKE:
-    //   return {
-    //     ...state,
-    //     likedJokes: [...state.likedJokes, payload],
-    //   };
-    case REMOVE_FROM_LIKED_LIST:
+    case ADD_LIKED_JOKE:
       return {
         ...state,
+        likedJokes: [...state.likedJokes, payload],
       };
+    case REMOVE_FROM_LIKED_LIST:
+      
+      return {
+        ...state,
+        card : state.disLike.filter((card) => card.joke !== action.payload)      };
     default:
       return state;
   }

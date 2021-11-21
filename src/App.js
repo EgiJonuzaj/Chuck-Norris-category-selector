@@ -18,6 +18,10 @@ function App() {
     // const { data } = getCategories();
     setIsLoading(true);
     setTimeout(() => {
+      dispatch({
+        type: SELECT_CATEGORY,
+        payload: categories,
+      });
       setCategories(["Category 1", "Category 2", "Category 3", "Category 4"]);
 
       setIsLoading(false);
