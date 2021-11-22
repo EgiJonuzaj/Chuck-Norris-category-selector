@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CategoryListItems from "./category-list-items";
-import { getCategories } from "./services";
 import { SELECT_CATEGORY } from "./redux/actionType";
 import { useDispatch } from "react-redux";
-import { selectCategory } from "./redux/actions";
 import { Spin } from "antd";
 
 function App() {

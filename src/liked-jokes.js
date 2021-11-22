@@ -2,11 +2,11 @@ import { Spin, Button, List, Typography } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { REMOVE_FROM_LIKED_LIST, ADD_LIKED_JOKE } from "./redux/actionType";
-import { jokeLikedSelector, remove } from "./redux/selectors";
+import { jokeLikedSelector, disLikeSelector } from "./redux/selectors";
 
 export const LikedJokes = ({ jokeData }) => {
   const likedJokes = useSelector(jokeLikedSelector);
-  const removeJoke = useSelector(remove);
+  const dislikeJokes = useSelector(disLikeSelector);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +30,6 @@ export const LikedJokes = ({ jokeData }) => {
     }, 1000);
   }, [jokeData, dispatch]);
 
-
   if (!likedJokes || isLoading) {
     return (
       <div>
@@ -38,7 +37,15 @@ export const LikedJokes = ({ jokeData }) => {
       </div>
     );
   }
-  // console.log(likeJoke,"is here")
+  if (!dislikeJokes || isLoading) {
+    return (
+      <div>
+        <Spin />
+      </div>
+    );
+  }
+  console.log(likedJokes,"is here")
+  console.log(dislikeJokes, " here too")
   return (
     <>
       <Button onClick={likeJoke}>Like</Button>
@@ -48,7 +55,7 @@ export const LikedJokes = ({ jokeData }) => {
         renderItem={(item) => (
           <List.Item>
             <Typography.Text mark>[ITEM]</Typography.Text> {item}
-            <Button  style={{ marginLeft: "50px" }} onClick={dislikeJoke}>
+            <Button style={{ marginLeft: "50px" }} onClick={dislikeJoke}>
               Dislike
             </Button>
           </List.Item>

@@ -9,7 +9,6 @@ const initiaState = {
   selectedCategory: undefined,
   joke: undefined,
   likedJokes: [],
-  disLike: [],
 };
 
 export const appReducer = (state = initiaState, action) => {
@@ -31,10 +30,10 @@ export const appReducer = (state = initiaState, action) => {
         likedJokes: [...state.likedJokes, payload],
       };
     case REMOVE_FROM_LIKED_LIST:
-      
       return {
         ...state,
-        card : state.disLike.filter((card) => card.joke !== action.payload)      };
+        likedJokes: state.likedJokes.filter((a) => a !== action.payload),
+      };
     default:
       return state;
   }

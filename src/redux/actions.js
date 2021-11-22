@@ -24,9 +24,9 @@ export const addLikedJoke = (likedJokes) => {
   };
 };
 
-export const removeFromLikedList = (text) => {
+export const removeFromLikedList = (dislikeJokes) => {
   return {
     type: REMOVE_FROM_LIKED_LIST,
-    payload: text,
+    payload: dislikeJokes,
   };
 };
